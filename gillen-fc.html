@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gillen FC — Football Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0a1628;
+  --navy-mid: #121f36;
+  --navy-light: #1a2d4a;
+  --gold: #c8a84e;
+  --gold-light: #e0c76a;
+  --gold-dim: rgba(200, 168, 78, 0.15);
+  --white: #f4f1ec;
+  --white-pure: #ffffff;
+  --gray: #8a95a8;
+  --gray-light: #c5ccda;
+  --bg-section: #0d1b30;
+  --bg-section-alt: #0f1f38;
+  --text-body: #c5ccda;
+  --shadow-heavy: 0 20px 60px rgba(0,0,0,0.5);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy);
+  color: var(--text-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10, 22, 40, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(200, 168, 78, 0.12);
+  transition: var(--transition);
+}
+
+nav.scrolled {
+  background: rgba(10, 22, 40, 0.98);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 72px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.nav-crest {
+  width: 44px;
+  height: 44px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: var(--navy);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.nav-brand-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  color: var(--white);
+  letter-spacing: 3px;
+}
+
+.nav-brand-text span {
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray-light);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-instagram {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold);
+  color: var(--navy) !important;
+  padding: 8px 18px !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+}
+
+.nav-instagram::after { display: none !important; }
+.nav-instagram:hover {
+  background: var(--gold-light) !important;
+  color: var(--navy) !important;
+}
+
+.nav-instagram svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--navy);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+}
+.hamburger span {
+  width: 26px;
+  height: 2px;
+  background: var(--gold);
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy) 0%, #0d1e35 50%, #0f2340 100%);
+}
+
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(200, 168, 78, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(200, 168, 78, 0.03) 0%, transparent 50%);
+}
+
+.hero-lines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.06;
+}
+
+.hero-lines::before,
+.hero-lines::after {
+  content: '';
+  position: absolute;
+  background: var(--gold);
+}
+
+.hero-lines::before {
+  width: 1px;
+  height: 100%;
+  left: 20%;
+}
+
+.hero-lines::after {
+  width: 1px;
+  height: 100%;
+  right: 30%;
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  padding: 120px 32px 80px;
+  max-width: 900px;
+  animation: heroFade 1.2s ease forwards;
+}
+
+@keyframes heroFade {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(200, 168, 78, 0.3);
+  padding: 8px 24px;
+  border-radius: 40px;
+  margin-bottom: 32px;
+  animation: heroFade 1.2s ease 0.2s both;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 12vw, 160px);
+  line-height: 0.9;
+  color: var(--white);
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+  animation: heroFade 1.2s ease 0.3s both;
+}
+
+.hero-title span {
+  display: block;
+  color: var(--gold);
+  font-size: 0.45em;
+  letter-spacing: 12px;
+  margin-top: 4px;
+}
+
+.hero-subtitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  color: var(--gray);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  animation: heroFade 1.2s ease 0.5s both;
+}
+
+.hero-cta {
+  margin-top: 48px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: heroFade 1.2s ease 0.6s both;
+}
+
+.btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 36px;
+  border-radius: 6px;
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(200, 168, 78, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid rgba(200, 168, 78, 0.4);
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  background: rgba(200, 168, 78, 0.08);
+  transform: translateY(-2px);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2.5s infinite;
+}
+
+.hero-scroll span {
+  display: block;
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(200, 168, 78, 0.3);
+  border-radius: 14px;
+  position: relative;
+}
+
+.hero-scroll span::after {
+  content: '';
+  width: 3px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 2px;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollDot 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+@keyframes scrollDot {
+  0% { opacity: 1; top: 8px; }
+  100% { opacity: 0; top: 22px; }
+}
+
+/* ── SECTION STYLES ── */
+section {
+  padding: 100px 32px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 6vw, 64px);
+  color: var(--white);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── PHOTO GALLERY (on homepage) ── */
+#photos {
+  background: var(--bg-section);
+  padding: 100px 32px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--navy-light);
+  border: 1px solid rgba(200, 168, 78, 0.08);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(200, 168, 78, 0.2);
+}
+
+.gallery-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  color: var(--gray);
+}
+
+.gallery-placeholder svg {
+  width: 40px;
+  height: 40px;
+  stroke: var(--gold);
+  opacity: 0.4;
+}
+
+.gallery-placeholder span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.gallery-item:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+.gallery-note {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 14px;
+  color: var(--gray);
+  font-style: italic;
+}
+
+/* ── ABOUT ── */
+#about {
+  background: var(--bg-section-alt);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.about-image {
+  aspect-ratio: 4/3;
+  background: var(--navy-light);
+  border-radius: 12px;
+  border: 1px solid rgba(200, 168, 78, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-image::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.about-image-placeholder {
+  text-align: center;
+  color: var(--gray);
+}
+
+.about-image-placeholder svg {
+  width: 64px;
+  height: 64px;
+  stroke: var(--gold);
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+
+.about-image-placeholder span {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.4;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+.about-text h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+.about-text p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+  color: var(--text-body);
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  background: rgba(200, 168, 78, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(200, 168, 78, 0.1);
+}
+
+.stat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 4px;
+}
+
+/* ── ROSTER ── */
+#roster {
+  background: var(--bg-section);
+}
+
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.roster-card {
+  background: var(--navy-mid);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(200, 168, 78, 0.06);
+  transition: var(--transition);
+}
+
+.roster-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(200, 168, 78, 0.15);
+}
+
+.roster-photo {
+  aspect-ratio: 3/3.5;
+  background: var(--navy-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.roster-photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, var(--navy-mid));
+}
+
+.roster-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  color: rgba(200, 168, 78, 0.08);
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  line-height: 1;
+}
+
+.roster-photo svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--gray);
+  opacity: 0.2;
+}
+
+.roster-info {
+  padding: 16px 20px 20px;
+}
+
+.roster-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+
+.roster-detail {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  color: var(--gray);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.roster-position {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+/* ── STAFF ── */
+#staff {
+  background: var(--bg-section-alt);
+}
+
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.staff-card {
+  display: flex;
+  gap: 20px;
+  padding: 28px;
+  background: var(--navy-mid);
+  border-radius: 10px;
+  border: 1px solid rgba(200, 168, 78, 0.06);
+  transition: var(--transition);
+}
+
+.staff-card:hover {
+  border-color: rgba(200, 168, 78, 0.15);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+.staff-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--navy-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid rgba(200, 168, 78, 0.15);
+}
+
+.staff-avatar svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--gold);
+  opacity: 0.4;
+}
+
+.staff-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.staff-role {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.staff-bio {
+  font-size: 14px;
+  color: var(--gray);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ── SCHEDULE ── */
+#schedule {
+  background: var(--bg-section);
+}
+
+.schedule-table {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 160px 120px;
+  align-items: center;
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(200, 168, 78, 0.06);
+  transition: var(--transition);
+}
+
+.schedule-row:hover {
+  background: rgba(200, 168, 78, 0.03);
+}
+
+.schedule-header {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 2px solid rgba(200, 168, 78, 0.2);
+}
+
+.schedule-date {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--gray-light);
+}
+
+.schedule-opponent {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.schedule-opponent small {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  color: var(--gray);
+  display: block;
+  margin-top: 2px;
+  letter-spacing: 0;
+}
+
+.schedule-location {
+  font-size: 14px;
+  color: var(--gray);
+}
+
+.schedule-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  text-align: right;
+}
+
+.schedule-result-win {
+  color: #4ade80;
+}
+
+.schedule-result-loss {
+  color: #f87171;
+}
+
+/* ── CONTACT ── */
+#contact {
+  background: var(--bg-section-alt);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contact-info h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 2;
+}
+
+.contact-detail-text strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+.contact-detail-text span {
+  color: var(--gray-light);
+  font-size: 15px;
+}
+
+.contact-detail-text a {
+  color: var(--gray-light);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.contact-detail-text a:hover {
+  color: var(--gold);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--navy-light);
+  border: 1px solid rgba(200, 168, 78, 0.1);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  transition: var(--transition);
+  outline: none;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--gray);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200, 168, 78, 0.1);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(200, 168, 78, 0.08);
+  padding: 48px 32px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-crest {
+  width: 36px;
+  height: 36px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  color: var(--navy);
+}
+
+.footer-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--white);
+}
+
+.footer-copy {
+  font-size: 13px;
+  color: var(--gray);
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(200, 168, 78, 0.08);
+  margin-left: 8px;
+  transition: var(--transition);
+}
+
+.footer-social a:hover {
+  background: var(--gold);
+}
+
+.footer-social svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--gold);
+  transition: var(--transition);
+}
+
+.footer-social a:hover svg {
+  fill: var(--navy);
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: rgba(10, 22, 40, 0.98);
+    flex-direction: column;
+    padding: 16px 32px 24px;
+    border-bottom: 1px solid rgba(200, 168, 78, 0.1);
+  }
+
+  .nav-links.open { display: flex; }
+
+  .nav-links a {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .nav-links a::after { display: none; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .gallery-item:first-child { grid-column: span 1; grid-row: span 1; }
+
+  .schedule-row {
+    grid-template-columns: 90px 1fr 100px;
+  }
+
+  .schedule-location { display: none; }
+
+  .roster-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  section { padding: 72px 20px; }
+  .nav-inner { padding: 0 20px; }
+  .schedule-row { grid-template-columns: 80px 1fr auto; padding: 16px 16px; }
+  .about-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .staff-card { flex-direction: column; align-items: center; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAVIGATION ═══════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">
+      <div class="nav-crest">GFC</div>
+      <div class="nav-brand-text">GILLEN <span>FC</span></div>
+    </a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#roster">Roster</a></li>
+      <li><a href="#staff">Staff</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <!-- ✏️ REPLACE the # below with your Instagram URL -->
+      <li><a href="#" class="nav-instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Follow
+      </a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Pre-Professional Summer League</div>
+    <h1 class="hero-title">
+      GILLEN
+      <span>FOOTBALL CLUB</span>
+    </h1>
+    <p class="hero-subtitle">Compete &bull; Develop &bull; Excel</p>
+    <div class="hero-cta">
+      <a href="#schedule" class="btn btn-primary">View Schedule</a>
+      <a href="#roster" class="btn btn-outline">Meet the Squad</a>
+    </div>
+  </div>
+  <a href="#photos" class="hero-scroll"><span></span></a>
+</section>
+
+<!-- ═══════ GAME PHOTOS ═══════ -->
+<section id="photos">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Matchday</div>
+      <h2 class="section-title">Game Photos</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="gallery-grid">
+      <!-- ✏️ REPLACE each gallery-placeholder with an <img> tag for your photos -->
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+          <span>Featured Photo</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+          <span>Game Photo</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+          <span>Game Photo</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+          <span>Game Photo</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+          <span>Game Photo</span>
+        </div>
+      </div>
+    </div>
+    <p class="gallery-note">Replace the placeholders above with your game photos. See comments in the HTML.</p>
+  </div>
+</section>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">About Gillen FC</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-image">
+        <div class="about-image-placeholder">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+          <span>Team Photo</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <h3>Built for Competition. Driven by Development.</h3>
+        <p>
+          Gillen Football Club is a pre-professional summer league team dedicated to providing a competitive environment for ambitious players looking to sharpen their skills and compete at the highest level.
+        </p>
+        <p>
+          Our program bridges the gap between college and professional play, offering a structured yet dynamic experience that prepares athletes for the next step in their careers.
+        </p>
+        <!-- ✏️ Edit the stats below with your actual numbers -->
+        <div class="about-stats">
+          <div class="stat-item">
+            <div class="stat-number">2025</div>
+            <div class="stat-label">Founded</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">25+</div>
+            <div class="stat-label">Players</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">12</div>
+            <div class="stat-label">Matches</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ROSTER ═══════ -->
+<section id="roster">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">2025 Season</div>
+      <h2 class="section-title">Roster</h2>
+      <div class="section-divider"></div>
+    </div>
+    <!-- ✏️ EDIT: Replace sample players with real roster data. Copy a roster-card block to add more. -->
+    <div class="roster-grid">
+
+      <div class="roster-card">
+        <div class="roster-photo">
+          <div class="roster-number">1</div>
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div class="roster-info">
+          <div class="roster-name">Player Name</div>
+          <div class="roster-detail">5'11" &bull; 170 lbs &bull; Sophomore</div>
+          <div class="roster-position">Goalkeeper</div>
+        </div>
+      </div>
+
+      <div class="roster-card">
+        <div class="roster-photo">
+          <div class="roster-number">4</div>
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div class="roster-info">
+          <div class="roster-name">Player Name</div>
+          <div class="roster-detail">6'0" &bull; 175 lbs &bull; Junior</div>
+          <div class="roster-position">Defender</div>
+        </div>
+      </div>
+
+      <div class="roster-card">
+        <div class="roster-photo">
+          <div class="roster-number">7</div>
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div class="roster-info">
+          <div class="roster-name">Player Name</div>
+          <div class="roster-detail">5'9" &bull; 165 lbs &bull; Senior</div>
+          <div class="roster-position">Midfielder</div>
+        </div>
+      </div>
+
+      <div class="roster-card">
+        <div class="roster-photo">
+          <div class="roster-number">9</div>
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div class="roster-info">
+          <div class="roster-name">Player Name</div>
+          <div class="roster-detail">5'10" &bull; 168 lbs &bull; Freshman</div>
+          <div class="roster-position">Forward</div>
+        </div>
+      </div>
+
+      <div class="roster-card">
+        <div class="roster-photo">
+          <div class="roster-number">10</div>
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div class="roster-info">
+          <div class="roster-name">Player Name</div>
+          <div class="roster-detail">5'8" &bull; 155 lbs &bull; Sophomore</div>
+          <div class="roster-position">Midfielder</div>
+        </div>
+      </div>
+
+      <div class="roster-card">
+        <div class="roster-photo">
+          <div class="roster-number">11</div>
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div class="roster-info">
+          <div class="roster-name">Player Name</div>
+          <div class="roster-detail">6'1" &bull; 180 lbs &bull; Junior</div>
+          <div class="roster-position">Forward</div>
+        </div>
+      </div>
+
+      <div class="roster-card">
+        <div class="roster-photo">
+          <div class="roster-number">3</div>
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div class="roster-info">
+          <div class="roster-name">Player Name</div>
+          <div class="roster-detail">5'11" &bull; 172 lbs &bull; Sophomore</div>
+          <div class="roster-position">Defender</div>
+        </div>
+      </div>
+
+      <div class="roster-card">
+        <div class="roster-photo">
+          <div class="roster-number">8</div>
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div class="roster-info">
+          <div class="roster-name">Player Name</div>
+          <div class="roster-detail">5'10" &bull; 160 lbs &bull; Senior</div>
+          <div class="roster-position">Midfielder</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ STAFF ═══════ -->
+<section id="staff">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">Coaching Staff</h2>
+      <div class="section-divider"></div>
+    </div>
+    <!-- ✏️ EDIT: Replace with real staff info -->
+    <div class="staff-grid">
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div>
+          <div class="staff-name">Staff Name</div>
+          <div class="staff-role">Head Coach</div>
+          <p class="staff-bio">Brief bio about the head coach goes here. Playing history, coaching experience, and philosophy.</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div>
+          <div class="staff-name">Staff Name</div>
+          <div class="staff-role">Assistant Coach</div>
+          <p class="staff-bio">Brief bio about the assistant coach goes here.</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div>
+          <div class="staff-name">Staff Name</div>
+          <div class="staff-role">Team Manager</div>
+          <p class="staff-bio">Brief bio about the team manager goes here.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SCHEDULE ═══════ -->
+<section id="schedule">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Summer 2025</div>
+      <h2 class="section-title">Schedule</h2>
+      <div class="section-divider"></div>
+    </div>
+    <!-- ✏️ EDIT: Replace sample schedule with real match data -->
+    <div class="schedule-table">
+      <div class="schedule-row schedule-header">
+        <div>Date</div>
+        <div>Opponent</div>
+        <div>Location</div>
+        <div style="text-align:right">Time</div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="schedule-date">Jun 7</div>
+        <div class="schedule-opponent">Opponent FC<small>Preseason Friendly</small></div>
+        <div class="schedule-location">Home</div>
+        <div class="schedule-time">7:00 PM</div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="schedule-date">Jun 14</div>
+        <div class="schedule-opponent">City United<small>League Match</small></div>
+        <div class="schedule-location">Away</div>
+        <div class="schedule-time">6:00 PM</div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="schedule-date">Jun 21</div>
+        <div class="schedule-opponent">Valley SC<small>League Match</small></div>
+        <div class="schedule-location">Home</div>
+        <div class="schedule-time">7:00 PM</div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="schedule-date">Jun 28</div>
+        <div class="schedule-opponent">Metro Athletic<small>League Match</small></div>
+        <div class="schedule-location">Away</div>
+        <div class="schedule-time">5:30 PM</div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="schedule-date">Jul 5</div>
+        <div class="schedule-opponent">Riverside FC<small>League Match</small></div>
+        <div class="schedule-location">Home</div>
+        <div class="schedule-time">7:00 PM</div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="schedule-date">Jul 12</div>
+        <div class="schedule-opponent">Inland Empire SC<small>League Match</small></div>
+        <div class="schedule-location">Away</div>
+        <div class="schedule-time">6:00 PM</div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="schedule-date">Jul 19</div>
+        <div class="schedule-opponent">SoCal Alliance<small>Cup Quarterfinal</small></div>
+        <div class="schedule-location">TBD</div>
+        <div class="schedule-time">TBD</div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="schedule-date">Jul 26</div>
+        <div class="schedule-opponent">TBD<small>Cup Semifinal</small></div>
+        <div class="schedule-location">TBD</div>
+        <div class="schedule-time">TBD</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Want to Get Involved?</h3>
+        <p>Whether you're interested in trying out, sponsoring, or just following the club — we'd love to hear from you.</p>
+
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Email</strong>
+            <!-- ✏️ Replace with your real email -->
+            <a href="mailto:info@gillenfc.com">info@gillenfc.com</a>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Location</strong>
+            <!-- ✏️ Replace with your location -->
+            <span>Claremont, California</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z" fill="var(--gold)" stroke="none"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Instagram</strong>
+            <!-- ✏️ Replace with your Instagram handle & URL -->
+            <a href="#" target="_blank">@gillenfc</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <input type="text" placeholder="Full Name" />
+        <input type="email" placeholder="Email Address" />
+        <input type="text" placeholder="Subject" />
+        <textarea placeholder="Your Message"></textarea>
+        <button class="btn btn-primary" type="button">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-crest">GFC</div>
+      <div class="footer-name">GILLEN FC</div>
+    </div>
+    <div class="footer-copy">&copy; 2025 Gillen Football Club. All rights reserved.</div>
+    <div class="footer-social">
+      <!-- ✏️ Replace # with your Instagram URL -->
+      <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Close mobile menu on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
