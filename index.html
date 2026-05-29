@@ -68,17 +68,9 @@ nav.scrolled {
   text-decoration: none;
 }
 
-.nav-crest {
-  width: 42px; height: 42px;
-  background: var(--orange);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Impact', 'Arial Black', sans-serif;
-  font-size: 15px;
-  color: var(--black);
-  letter-spacing: 1px;
+.nav-logo {
+  height: 48px;
+  width: auto;
   flex-shrink: 0;
 }
 
@@ -199,6 +191,13 @@ nav.scrolled {
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-logo {
+  width: 160px;
+  height: auto;
+  margin-bottom: 32px;
+  animation: fadeUp 1s ease 0.1s both;
 }
 
 .hero-badge {
@@ -628,6 +627,7 @@ section { padding: 100px 32px; }
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .roster-photo::after {
@@ -636,6 +636,7 @@ section { padding: 100px 32px; }
   bottom: 0; left: 0; right: 0;
   height: 60px;
   background: linear-gradient(transparent, var(--black-card));
+  z-index: 1;
 }
 
 .roster-number {
@@ -645,6 +646,7 @@ section { padding: 100px 32px; }
   position: absolute;
   top: 8px; right: 14px;
   line-height: 1;
+  z-index: 2;
 }
 
 .roster-photo svg {
@@ -652,6 +654,13 @@ section { padding: 100px 32px; }
   stroke: var(--gray-dark);
   opacity: 0.3;
   fill: none; stroke-width: 1.5;
+}
+
+.roster-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
 }
 
 .roster-info { padding: 14px 18px 18px; }
@@ -692,7 +701,7 @@ section { padding: 100px 32px; }
 
 .staff-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 24px;
 }
 
@@ -721,6 +730,7 @@ section { padding: 100px 32px; }
   justify-content: center;
   flex-shrink: 0;
   border: 2px solid rgba(255, 105, 0, 0.12);
+  overflow: hidden;
 }
 
 .staff-avatar svg {
@@ -728,6 +738,11 @@ section { padding: 100px 32px; }
   stroke: var(--orange);
   opacity: 0.4;
   fill: none; stroke-width: 1.5;
+}
+
+.staff-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
 }
 
 .staff-name {
@@ -751,7 +766,7 @@ section { padding: 100px 32px; }
   font-size: 14px;
   color: var(--gray);
   margin-top: 8px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 #contact { background: var(--section-alt); }
@@ -878,16 +893,9 @@ footer {
   gap: 12px;
 }
 
-.footer-crest {
-  width: 34px; height: 34px;
-  background: var(--orange);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Impact', 'Arial Black', sans-serif;
-  font-size: 12px;
-  color: var(--black);
+.footer-logo {
+  height: 36px;
+  width: auto;
 }
 
 .footer-name {
@@ -969,6 +977,7 @@ footer {
   .contact-grid { grid-template-columns: 1fr; }
   .charity-grid { grid-template-columns: 1fr; }
   .sponsors-grid { flex-direction: column; align-items: center; }
+  .staff-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
@@ -983,10 +992,11 @@ footer {
 </head>
 <body>
 
+<!-- ═══════ NAVIGATION ═══════ -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#hero" class="nav-brand">
-      <img src="images/gillen_logo.png" alt="Gillen FC" style="width:42px; height:42px; border-radius:50%; object-fit:cover;">
+      <img src="images/gillen_logo.png" alt="Gillen FC" class="nav-logo">
       <div class="nav-brand-text">GILLEN <span>FC</span></div>
     </a>
     <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
@@ -1000,7 +1010,7 @@ footer {
       <li><a href="#roster">Roster</a></li>
       <li><a href="#staff">Staff</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="https://www.instagram.com/gillen.fc/" class="nav-ig" target="_blank" rel="noopener">
+      <li><a href="https://www.instagram.com/gillen_fc/" class="nav-ig" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         @gillen_fc
       </a></li>
@@ -1008,10 +1018,12 @@ footer {
   </div>
 </nav>
 
+<!-- ═══════ HERO ═══════ -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-stripes"></div>
   <div class="hero-content">
+    <img src="images/gillen_logo.png" alt="Gillen FC Crest" class="hero-logo">
     <div class="hero-badge">Cascadia Premier League &bull; Seattle, WA</div>
     <h1 class="hero-title">
       GILLEN
@@ -1026,6 +1038,7 @@ footer {
   <a href="#about" class="hero-scroll"><span></span></a>
 </section>
 
+<!-- ═══════ ABOUT / JAKE GILLEN ═══════ -->
 <section id="about">
   <div class="container">
     <div class="section-header">
@@ -1046,6 +1059,7 @@ footer {
   </div>
 </section>
 
+<!-- ═══════ CHARITIES ═══════ -->
 <section id="charities">
   <div class="container">
     <div class="section-header">
@@ -1087,6 +1101,7 @@ footer {
   </div>
 </section>
 
+<!-- ═══════ DONATIONS ═══════ -->
 <section id="donations">
   <div class="container">
     <div class="section-header">
@@ -1113,6 +1128,7 @@ footer {
   </div>
 </section>
 
+<!-- ═══════ SPONSORS ═══════ -->
 <section id="sponsors">
   <div class="container">
     <div class="section-header">
@@ -1134,6 +1150,9 @@ footer {
   </div>
 </section>
 
+<!-- ═══════ ROSTER ═══════ -->
+<!-- To add a player photo: upload to images/ folder, then replace the SVG with:
+     <img src="images/player-name.jpg" alt="Player Name"> -->
 <section id="roster">
   <div class="container">
     <div class="section-header">
@@ -1142,6 +1161,7 @@ footer {
       <div class="section-divider"></div>
     </div>
     <div class="roster-grid">
+
       <div class="roster-card">
         <div class="roster-photo">
           <div class="roster-number">1</div>
@@ -1153,6 +1173,7 @@ footer {
           <div class="roster-position">Goalkeeper</div>
         </div>
       </div>
+
       <div class="roster-card">
         <div class="roster-photo">
           <div class="roster-number">4</div>
@@ -1164,6 +1185,7 @@ footer {
           <div class="roster-position">Defender</div>
         </div>
       </div>
+
       <div class="roster-card">
         <div class="roster-photo">
           <div class="roster-number">6</div>
@@ -1175,6 +1197,7 @@ footer {
           <div class="roster-position">Defender</div>
         </div>
       </div>
+
       <div class="roster-card">
         <div class="roster-photo">
           <div class="roster-number">8</div>
@@ -1186,6 +1209,7 @@ footer {
           <div class="roster-position">Midfielder</div>
         </div>
       </div>
+
       <div class="roster-card">
         <div class="roster-photo">
           <div class="roster-number">10</div>
@@ -1197,6 +1221,7 @@ footer {
           <div class="roster-position">Midfielder</div>
         </div>
       </div>
+
       <div class="roster-card">
         <div class="roster-photo">
           <div class="roster-number">9</div>
@@ -1208,6 +1233,7 @@ footer {
           <div class="roster-position">Forward</div>
         </div>
       </div>
+
       <div class="roster-card">
         <div class="roster-photo">
           <div class="roster-number">11</div>
@@ -1219,6 +1245,7 @@ footer {
           <div class="roster-position">Forward</div>
         </div>
       </div>
+
       <div class="roster-card">
         <div class="roster-photo">
           <div class="roster-number">5</div>
@@ -1230,10 +1257,14 @@ footer {
           <div class="roster-position">Defender</div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- ═══════ STAFF ═══════ -->
+<!-- To add a staff photo: upload to images/ folder, then replace the SVG with:
+     <img src="images/staff-name.jpg" alt="Staff Name"> -->
 <section id="staff">
   <div class="container">
     <div class="section-header">
@@ -1242,6 +1273,7 @@ footer {
       <div class="section-divider"></div>
     </div>
     <div class="staff-grid">
+
       <div class="staff-card">
         <div class="staff-avatar">
           <svg viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
@@ -1249,54 +1281,70 @@ footer {
         <div>
           <div class="staff-name">David Helfer</div>
           <div class="staff-role">Head Coach / Team Owner</div>
-          <p class="staff-bio">Born and raised in Washington, DC, David Helfer grew up playing and coaching soccer up through the college and semi-professional levels on the East Coast
-          and in the Midwest. He eventually made his way to Seattle, which has been his home for the past three decades. As the head coach and team owner of Gillen FC,
-          David leans heavily into a player-first, collaborative, chemistry-driven team and coaching philosophy. He values intentionality, investment, community, and technical artistry on the field,
-          and is thrilled to collaborate with his fellow coaches, staff, and players to proudly represent Gillen FC’s sponsors, charitable partners, and the Gillen family. 
-</p>
+          <p class="staff-bio">Born and raised in Washington, DC, David grew up playing and coaching soccer through the college and semi-professional levels before settling in Seattle over three decades ago. As head coach and team owner, he champions a player-first, chemistry-driven philosophy rooted in intentionality, community, and technical artistry on the field.</p>
+        </div>
       </div>
-      </div>
+
       <div class="staff-card">
         <div class="staff-avatar">
           <svg viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
         </div>
         <div>
           <div class="staff-name">Greg Daly</div>
-          <div class="staff-role">Assistant Coach / Goalkeeper Coach</div>
-          <p class="staff-bio">Originally from the Seattle area, Greg Daly played water polo at the University of Washington, where he studied Electrical Engineering. His background as a multi-sport athlete informs
-          a coaching style built on discipline, resilience, and competitive mentality. Greg serves as an Assistant Coach and Head Goalkeeper Coach with Gillen FC. He has been part of multiple successful high school programs,
-          including a Metro League and State Championship season with Lincoln High School in 2023, a 4th place state finish with Lincoln’s girls program that same year, and another 4th place finish with Ingraham High School in 2025.
-           His coaching emphasizes goalkeeper mentality—focus, accountability, and the ability to perform under pressure—while building strong team culture and chemistry. For Greg, Gillen FC is an opportunity to help a group of dedicated 
-           players continue their development and reach the next level in their soccer careers.
-</p>
+          <div class="staff-role">Assistant Coach / GK Coach</div>
+          <p class="staff-bio">Originally from Seattle, Greg played water polo at the University of Washington and studied Electrical Engineering. His multi-sport background shapes a coaching style built on discipline, resilience, and competitive mentality. He has contributed to multiple successful high school programs, including a Metro League and State Championship with Lincoln High School in 2023.</p>
         </div>
       </div>
+
       <div class="staff-card">
         <div class="staff-avatar">
           <svg viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
         </div>
         <div>
           <div class="staff-name">Gavin Davis</div>
-          <div class="staff-role">Chief Marketing Officer</div>
-          <p class="staff-bio">Gavin Davis grew up in Ballard and currently plays collegiate club soccer at Santa Clara University, where he studies sports marketing. He has experience in marketing and brand development. 
-            Serving as the Chief Marketing Officer, Gavin has helped launch Gillen FC from the ground up. Also a player on the team, he is passionate about honoring former coach Jake Gillen and building a strong, connected soccer community.
-          </p>
+          <div class="staff-role">Chief Marketing Officer / Player</div>
+          <p class="staff-bio">Gavin grew up in Ballard and currently plays collegiate club soccer at Santa Clara University, where he studies sports marketing. With experience in marketing and brand development, he helped launch Gillen FC from the ground up. As both a player and CMO, he is passionate about honoring former coach Jake Gillen and building a strong soccer community.</p>
         </div>
       </div>
-       </div>
-      </div>
+
       <div class="staff-card">
         <div class="staff-avatar">
           <svg viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
         </div>
         <div>
-          <div class="staff-name">Staff Name</div>
-          <div class="staff-role">Assistant Coach</div>
-          <p class="staff-bio">Brief bio goes here.</p>
+          <div class="staff-name">Jiselle Nguyen</div>
+          <div class="staff-role">Graphic Designer / Merchandise</div>
+          <p class="staff-bio">Jiselle is based in Palos Verdes, California, and is currently studying Mathematics and Data Science at Pitzer College in Claremont, California. With a passion for graphic design and creative branding, she is committed to designing merchandise and visual content that supports Gillen FC and strengthens the club's identity both on and off the field.</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div>
+          <div class="staff-name">Marley Helfer</div>
+          <div class="staff-role">Designer / Photographer / Copywriter</div>
+          <p class="staff-bio">Marley is currently studying Multimedia Journalism at Emerson College in Boston. As a former player for Seattle Celtic FC and a lifelong athlete, she brings insight from both on and off the field. As a graphic designer, staff photographer, and copywriter, Marley is committed to fostering a collaborative, values-driven culture within the marketing team.</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <div>
+          <div class="staff-name">Scarlett Heikkila</div>
+          <div class="staff-role">Sports Communications</div>
+          <p class="staff-bio">Scarlett grew up in San Diego, California, and is currently studying sports communications at Emerson College in Boston. With experience in journalism and broadcasting, she is dedicated to elevating the Gillen FC brand through creative storytelling and a strong passion for sports media and marketing.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- ═══════ CONTACT ═══════ -->
 <section id="contact">
   <div class="container">
     <div class="section-header">
@@ -1314,7 +1362,7 @@ footer {
           </div>
           <div class="contact-detail-text">
             <strong>Email</strong>
-            <a href="mailto:gillenfc@gmail.com">info@gillenfc.com</a>
+            <a href="mailto:gillenfc@gmail.com">gillenfc@gmail.com</a>
           </div>
         </div>
         <div class="contact-detail">
@@ -1323,7 +1371,7 @@ footer {
           </div>
           <div class="contact-detail-text">
             <strong>Website</strong>
-            <a href="http://gillenfc.org" target="_blank">gillenfc.com</a>
+            <a href="http://gillenfc.org" target="_blank">gillenfc.org</a>
           </div>
         </div>
         <div class="contact-detail">
@@ -1332,7 +1380,7 @@ footer {
           </div>
           <div class="contact-detail-text">
             <strong>Instagram</strong>
-            <a href="https://www.instagram.com/gillen.fc/" target="_blank">@gillen.fc</a>
+            <a href="https://www.instagram.com/gillen_fc/" target="_blank">@gillen_fc</a>
           </div>
         </div>
         <div class="contact-detail">
@@ -1356,10 +1404,11 @@ footer {
   </div>
 </section>
 
+<!-- ═══════ FOOTER ═══════ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-crest">GFC</div>
+      <img src="images/gillen_logo.png" alt="Gillen FC" class="footer-logo">
       <div class="footer-name">GILLEN FC</div>
     </div>
     <div class="footer-links">
@@ -1370,11 +1419,11 @@ footer {
       <a href="http://gillenfc.org" target="_blank">GillenFC.org</a>
     </div>
     <div class="footer-social">
-      <a href="https://www.instagram.com/gillen.fc/" target="_blank" rel="noopener" aria-label="Instagram">
+      <a href="https://www.instagram.com/gillen_fc/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
       </a>
     </div>
-    <div class="footer-copy">&copy; 2026 Gillen Football Club LLC. All rights reserved.</div>
+    <div class="footer-copy">&copy; 2025 Gillen Football Club LLC. All rights reserved.</div>
   </div>
 </footer>
 
